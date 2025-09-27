@@ -1,5 +1,5 @@
 # Use official nginx image
-FROM nginx:alpine
+FROM nginx:1-alpine-slim
 
 # Install envsubst (from gettext)
 RUN apk add --no-cache gettext
