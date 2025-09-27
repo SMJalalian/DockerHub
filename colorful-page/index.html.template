@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>صفحه آزمایش کانتینر</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: ${COLOR};
+            font-family: 'Vazir', sans-serif;
+            color: #ffffff;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 40px 60px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            max-width: 600px;
+        }
+
+        .time {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .greeting {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .help-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .color-box {
+            width: 80px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-weight: bold;
+            cursor: default;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+
+        .color-box:hover {
+            transform: scale(1.1);
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p,
+        li {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="greeting" id="greeting">سلام!</div>
+
+        <p>🚀 این صفحه برای آزمایش وب‌سرور در کانتینر ساخته شده است.</p>
+
+        <h2>📘 راهنما</h2>
+        <p>شما می‌توانید رنگ پس‌زمینه را با متغیر محیطی <b>COLOR</b> تغییر دهید.</p>
+        <div class="help-box">
+            <div class="color-box" style="background:#e74c3c;">red</div>
+            <div class="color-box" style="background:#16a085;">green</div>
+            <div class="color-box" style="background:#2980b9;">blue</div>
+            <div class="color-box" style="background:#f1c40f;">yellow</div>
+            <div class="color-box" style="background:#be2edd;">pink</div>
+            <div class="color-box" style="background:#8e44ad;">purple</div>
+            <div class="color-box" style="background:#e67e22;">orange</div>
+            <div class="color-box" style="background:#a0522d;">brown</div>
+        </div>
+
+        <h2>⚙️ اطلاعات فنی</h2>
+        <p>نام کانتینر: ${HOSTNAME} </p>
+        <p>نسخه سرور: ${NGINX_VERSION} </p>
+        <p>رنگ پس زمینه: ${COLOR} </p>
+        <div class="time" id="time">--:--:--</div>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const h = now.getHours();
+            const m = now.getMinutes();
+            const s = now.getSeconds();
+            const timeStr =
+                String(h).padStart(2,'0') + ':' +
+                String(m).padStart(2,'0') + ':' +
+                String(s).padStart(2,'0');
+            document.getElementById('time').textContent = timeStr;
+
+            // Greeting based on time
+            let greeting = "سلام!";
+            if(h >= 5 && h < 12) greeting = "صبح بخیر!";
+            else if(h >= 12 && h < 18) greeting = "عصر بخیر!";
+            else if(h >= 18 && h < 22) greeting = "شب بخیر!";
+            else greeting = "وقت خواب بخیر!";
+            document.getElementById('greeting').textContent = greeting;
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+</html>
